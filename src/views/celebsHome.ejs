@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tabpanel.css">
+    <title>>Watch Your Movie</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-3">
+                <div class="userProfileInfo">
+                    <div class="box">
+                        <div class="name"><strong><%=thisUser.userName%></strong></div>
+                        <div class="info">
+                            <span><i class="fa fa-video-camera"></i> <a href="/profileMovies" title=""
+                                    >Add New
+                                    Favorite Movie</a></span>
+                            <span><i class="fa fa-user"></i> <a href="/profileCelebs" title="">Add New Favorite
+                                    Celebs</a></span>
+                        </div>
+                        <div class="socialIcons clearfix">
+                            <span><i class="fa fa-user-times"></i> <a href="/logout" style="color: rgb(255, 0, 0);"
+                                    title="">Logout</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-xs-12 col-md-8 col-lg-9">
+                    <div class="box">
+                        <h2 class="boxTitle">All Favorite Celebs</h2>
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs userProfileTabs" role="tablist">
+                            <li role="presentation" ><a href="/movieHome" aria-controls="tab-item-1"
+                                    role="tab" data-toggle="tab" aria-expanded="true">Movies</a></li>
+                            <li role="presentation" class="active"><a href="/CelebsHome" aria-controls="tab-item-2" role="tab"
+                                    data-toggle="tab" aria-expanded="true">Celebs</a></li>
+                            <li role="presentation" class=""><a href="/profileMovies" aria-controls="tab-item-3"
+                                    role="tab" data-toggle="tab" aria-expanded="false">Profile</a></li>
+                            <!-- <li role="presentation" class="" ><a href="/logout" aria-controls="tab-item-4" role="tab" data-toggle="tab" aria-expanded="false">Logout</a></li> -->
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Activities -->
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab-item-2">
+                                <div class="userActivities">
+                                    
+                                    <% for(let i=0; i<celebs.length; i++){  %>
+                                    <div class="i">
+                                        <div class="activityContent">
+                                            <ul class="simpleListings status">
+                                                <li id="contentShared">
+
+                                                    <div class="title">
+                                                        <a title="#"><%=celebs[i].user.userName%>                                                       
+                                                        </a>
+                                                    </div>
+
+                                                    <div id="imageDiv">
+                                                        <img src="<%=celebs[i].image%>" alt="#"
+                                                            id="contenPhoto" class="img-responsive">
+                                                    </div>
+                                                    <hr>
+                                                    <div class="title">
+                                                        <a title="#"><%=celebs[i].celebsName%></a>
+                                                    </div>
+                                                    <hr>
+                                                    <textarea class="form-control" style="width: 650px;" id="description" name="description" rows="4" readonly> <%=celebs[i].description%></textarea>
+                                                   
+
+                                                    <div class="share">
+                                                        <% if(userCelebsLikes.includes(celebs[i].id)) { %>
+                                                        <a href="/unlikeCelebs/celebsHome/<%=celebs[i].id %>"
+                                                            title="#"><i class="fa fa-thumbs-up"></i>
+                                                            <% } %>
+                                                            <% if(!userCelebsLikes.includes(celebs[i].id)) { %>
+                                                            <a href="/likeCelebs/celebsHome/<%=celebs[i].id %>"
+                                                                title="#"><i class="fa fa-thumbs-up"></i>
+                                                                <% } %>
+                                                                <%=celebs[i].likes.length%></a>
+                                                            <a title="#"><i class="fa fa-comments"></i>
+                                                                <%=celebs[i].comments.length%> </a>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+
+                                            <!-- Comments -->
+                                            <ul class="simpleListings comments"  style="max-height:400px;overflow:hidden; overflow-y:scroll; text-indent: 1em; ">
+                                              
+                                                <% for(let j=0; j<celebs[i].comments.length; j++){  %>
+
+                                                <li>
+                                                    <p><i class="fa fa-comments"></i></p>
+                                                    <div class="c">
+                                                        <div class="title"><a href="#"
+                                                                title="#"><%=celebs[i].comments[j].writerName%></a>
+                                                        </div>
+                                                        <p><%=celebs[i].comments[j].text  %> </p>
+                                                    </div>
+
+                                                </li>
+                                              
+                                              
+                                                <% } %>
+
+                                               
+                                            </ul>
+                                              <div class="c">
+                                                        <form
+                                                            action="/createCelebsComment/celebsHome/<%=celebs[i].id %>"
+                                                            method="post">
+                                                            <textarea name="text" rows="1"
+                                                                placeholder="Start typing here..."
+                                                                class="form-control js-autogrow"
+                                                                style="overflow: hidden; word-wrap: break-word; height: 42px;"></textarea>
+                                                            <button type="submit" class="button"
+                                                                style="vertical-align:middle"><span> Post
+                                                                    Comment</span></button>
+                                                        </form>
+                                                    </div>
+                                        </div>
+                                    </div>
+                                    <%  } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

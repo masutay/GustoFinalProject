@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>>Watch Your Movie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+<body>
+    <%- include('partials/_checkForm.ejs') %>
+    <% if (typeof errorMessage !== "undefined") { %>
+    <div class="alert show">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg"> <%- errorMessage %> </span>
+    </div>
+
+    <% } %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11 mt-60 mx-md-auto">
+                <div class="login-box bg-white pr-lg-5 pr-0">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-md-6 order-md-last">
+                            <div class="form-wrap bg-white">
+                                <h4 class="btm-sep mb-1">Register</h4>
+                                <form class="form" method="post" action="/register">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group position-relative">
+                                                <span class="zmdi zmdi-account"></span>
+                                                <input type="text" name="userName" id="username" class="form-control"
+                                                    placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group position-relative">
+                                                <span class="zmdi zmdi-email"></span>
+                                                <input type="email" name="email" id="email" class="form-control"
+                                                    placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group position-relative">
+                                                <span class="zmdi zmdi-lock"></span>
+                                                <input type="password" name="password" id="password"
+                                                    class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" id="submit"
+                                                class="btn btn-lg btn-custom btn-dark btn-block">
+                                                Sign Up
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-first">
+                            <div class="content text-center">
+                                <div class="border-bottom pb-4 mb-5">
+                                    <h3 class="c-black">Already have an account?</h3>
+                                    <a href="/login" id="signIn" class="btn btn-primary">Sign In</a>
+                                </div>
+                                <h5 class="c-black mb-4 mt-n1">Or Sign Up With</h5>
+                                <div class="socials">
+                                    <a href="/auth/facebook" class="zmdi zmdi-facebook"></a>
+                                    <a href="/auth/google" class="zmdi zmdi-google"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
